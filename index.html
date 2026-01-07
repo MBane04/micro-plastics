@@ -84,7 +84,51 @@
 
         <section id="media">
             <h2><i class="fas fa-film"></i> Media</h2>
-            <p>Coming Soon!</p>
+            <p style="margin-bottom:18px;">Rendered stills and a short capture of the coagulation run. Click thumbnails to swap media; arrows or arrow keys move through the set.</p>
+
+            <div class="gallery-viewer">
+                <button class="gallery-nav prev" aria-label="Previous media"><i class="fas fa-chevron-left"></i></button>
+                <div class="gallery-media">
+                    <video id="gallery-video" controls preload="metadata" style="display:none;"></video>
+                    <img id="gallery-image" alt="Gallery media" style="display:none;" loading="lazy">
+                </div>
+                <div class="gallery-meta">
+                    <h4 id="gallery-title">Microplastic Coagulation</h4>
+                    <p id="gallery-desc">GPU capture showing polymer chains drawing microplastics together.</p>
+                </div>
+                <button class="gallery-nav next" aria-label="Next media"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="gallery-thumbs" id="gallery-thumbs" aria-label="Gallery thumbnails">
+                <button class="gallery-thumb" data-type="video" data-src="assets/coagulation-video.mp4" data-title="Coagulation Capture" data-desc="Live CUDA/OpenGL capture of the beaker as chains pull plastics together.">
+                    <span class="thumb-badge">Video</span>
+                    <img src="assets/simulationStir.png" alt="Coagulation capture">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/simulationStart.png" data-title="Initialization" data-desc="Start of run with polymer chains dispersed before stirring.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/simulationStart.png" alt="Simulation start frame">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/simulationStir.png" data-title="Mid-Stir" data-desc="Chains stretch as stirring begins inside the virtual beaker.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/simulationStir.png" alt="Simulation mid-stir frame">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/simulationEnd.png" data-title="Coagulated" data-desc="Clusters form near the bottom as gravity and drag settle the mix.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/simulationEnd.png" alt="Simulation end frame">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/mpBeakerTop.png" data-title="Top View" data-desc="Top-down still showing microplastic chains and radial distribution.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/mpBeakerTop.png" alt="Top view">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/mpBreakerSide.png" data-title="Side View" data-desc="Side view of the beaker highlighting stratification during mixing.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/mpBreakerSide.png" alt="Side view">
+                </button>
+                <button class="gallery-thumb" data-type="image" data-src="assets/TerminalCommands.png" data-title="NVCC Pipeline" data-desc="Snapshot of the nvcc build script used to render and export the media set.">
+                    <span class="thumb-badge image">Image</span>
+                    <img src="assets/TerminalCommands.png" alt="Terminal commands">
+                </button>
+            </div>
         </section>
     </div>
 

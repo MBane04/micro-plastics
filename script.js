@@ -69,3 +69,82 @@ const observer = new IntersectionObserver(function(entries) {
 }, observerOptions);
 
 document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+// Media gallery controller
+document.addEventListener('DOMContentLoaded', function() {
+    const thumbsContainer = document.getElementById('gallery-thumbs');
+    const videoEl = document.getElementById('gallery-video');
+    const imageEl = document.getElementById('gallery-image');
+    const titleEl = document.getElementById('gallery-title');
+    const descEl = document.getElementById('gallery-desc');
+    const prevBtn = document.querySelector('.gallery-nav.prev');
+    const nextBtn = document.querySelector('.gallery-nav.next');
+
+    if (!thumbsContainer || !videoEl || !imageEl || !titleEl || !descEl) return;
+
+    const items = Array.from(thumbsContainer.querySelectorAll('.gallery-thumb')).map((btn, index) => {
+        btn.dataset.index = index;
+        return {
+            button: btn,
+            type: btn.dataset.type,
+            src: btn.dataset.src,
+            title: btn.dataset.title || '',
+            desc: btn.dataset.desc || ''
+        };
+    });
+
+    if (!items.length) return;
+
+    let currentIndex = 0;
+
+    function render(index) {
+        currentIndex = (index + items.length) % items.length;
+        const item = items[currentIndex];
+
+        videoEl.pause();
+        videoEl.removeAttribute('src');
+        imageEl.removeAttribute('src');
+        videoEl.style.display = 'none';
+        imageEl.style.display = 'none';
+
+        if (item.type === 'video') {
+            videoEl.src = item.src;
+            videoEl.style.display = 'block';
+            videoEl.load();
+        } else {
+            imageEl.src = item.src;
+            imageEl.alt = item.title || 'Gallery image';
+            imageEl.style.display = 'block';
+        }
+
+        titleEl.textContent = item.title;
+        descEl.textContent = item.desc;
+
+        items.forEach((entry, idx) => {
+            if (idx === currentIndex) {
+                entry.button.classList.add('active');
+            } else {
+                entry.button.classList.remove('active');
+            }
+        });
+
+        const activeBtn = items[currentIndex].button;
+        if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
+            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+    }
+
+    items.forEach(item => {
+        item.button.addEventListener('click', () => render(Number(item.button.dataset.index)));
+    });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => render(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => render(currentIndex + 1));
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') render(currentIndex - 1);
+        if (e.key === 'ArrowRight') render(currentIndex + 1);
+    });
+
+    render(0);
+});
