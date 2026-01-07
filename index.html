@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microplastic Coagulation with Plant Polymers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Microplastic Coagulation Simulation</h1>
+        <p>CUDA/OpenGL n-body model of microplastics and plant polymers inside a virtual beaker. This page focuses only on the simulation; media will be updated with rendered stills.</p>
+    </header>
+
+    <nav>
+        <button id="nav-toggle" class="nav-toggle" title="Toggle menu"><i class="fas fa-bars"></i></button>
+        <ul>
+            <li><a href="#overview"><i class="fas fa-info-circle"></i> Overview</a></li>
+            <li><a href="#context"><i class="fas fa-project-diagram"></i> Context</a></li>
+            <li><a href="#media"><i class="fas fa-film"></i> Media</a></li>
+            <li><button id="dark-mode-toggle" class="dark-mode-btn" title="Toggle dark mode"><i class="fas fa-moon"></i><span class="mode-label">Dark</span></button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="overview">
+            <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+            <p>My first N-Body CUDA/OpenGL simulation used to study microplastic–polymer interactions in a virtual beaker. The model handles Brownian motion, chain connectivity, container walls, stirring, and gravity to preview coagulation dynamics before lab work. One setup file defines particle counts, sizes, densities, drag, and chain lengths so runs mirror planned lab scenarios; OpenGL renders and nvcc scripts make reruns fast. Media will be replaced with rendered stills exported on Linux.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Parallel processing</h3>
+                    <p>CUDA kernels compute polymer–polymer, polymer–microplastic, and microplastic–microplastic forces with Brownian noise.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Configurable</h3>
+                    <p>Adjust densities, diameters, drag, and connection lengths to tune coagulation behavior and match lab scenarios.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-vial"></i>
+                    <h3>Virtual beaker</h3>
+                    <p>Container walls, fluid height, and stirring controls emulate the lab beaker for visual validation.</p>
+                </div>
+            </div>
+            <h3 style="margin-top: 24px;">Quick Facts</h3>
+            <ul class="plain-list">
+                <li><strong>Goal:</strong> Reduce lab iteration time by vetting coagulation behavior in a GPU sandbox before wet work.</li>
+                <li><strong>Tech:</strong> CUDA C++ n-body solver with OpenGL visualization on Linux (nvcc toolchain).</li>
+                <li><strong>Force model:</strong> Brownian noise, gravity, container confinement, stirring field, polymer chain springs.</li>
+                <li><strong>Parameters:</strong> One setup file sets particle counts, diameters, densities, drag, and chain lengths to match planned lab runs.</li>
+            </ul>
+            <div class="media-card" style="margin-top:18px;">
+                <video controls preload="metadata">
+                    <source src="assets/coagulation-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section id="context">
+            <h2><i class="fas fa-project-diagram"></i> Main Project Context</h2>
+                <p>This simulation is an extension of the larger microplastic remediation project. The core effort focused on plant-derived polysaccharides (okra and fenugreek) as biodegradable coagulants to replace synthetic polyacrylamide. The GPU model serves as a sandbox to probe force models and mixing behavior before running wet-lab coagulation trials and capturing results in a physical beaker.</p>
+            <h3 style="margin-top: 20px; margin-bottom: 18px;">How the sim supports the main project</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>De-risks lab time</h3>
+                    <p>Test force/parameter ranges virtually before running wet-lab coagulation trials.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync"></i>
+                    <h3>Mirrors lab setup</h3>
+                    <p>Particle counts, densities, diameters, drag, and connection lengths match planned experiments.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-image"></i>
+                    <h3>Visual validation</h3>
+                    <p>Simulated beaker stills pair with lab photos to compare expected vs. real coagulation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="media">
+            <h2><i class="fas fa-film"></i> Media</h2>
+            <p>Coming Soon!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Mason Bane | Microplastics Simulation</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
