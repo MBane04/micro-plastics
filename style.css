@@ -414,6 +414,10 @@ footer { text-align: center; padding: 28px; color: var(--muted); }
     font-size: 1.02em;
 }
 
+/* Reduce focus ring noise for mouse clicks while preserving keyboard focus */
+.gallery-media :focus { outline: none; }
+.gallery-media :focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
   @media (max-width: 768px) {
       .gallery-viewer { grid-template-columns: 1fr; }
       .gallery-nav { justify-self: center; }

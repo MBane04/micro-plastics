@@ -130,8 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Only center the active thumbnail when user navigates (thumb/prev/next/keyboard), not on init
         if (via) {
             const activeBtn = items[currentIndex].button;
-            if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
-                activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            // Scroll the thumbnail container directly to avoid page scroll jumps
+            if (activeBtn && thumbsContainer && typeof thumbsContainer.scrollTo === 'function') {
+                const targetCenter = activeBtn.offsetLeft + (activeBtn.offsetWidth / 2) - (thumbsContainer.clientWidth / 2);
+                const left = Math.max(0, targetCenter);
+                thumbsContainer.scrollTo({ left, behavior: 'smooth' });
             }
         }
     }
