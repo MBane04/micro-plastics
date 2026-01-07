@@ -96,8 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!items.length) return;
 
     let currentIndex = 0;
-
-    function render(index) {
+    function render(index, via) {
         currentIndex = (index + items.length) % items.length;
         const item = items[currentIndex];
 
@@ -128,23 +127,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        const activeBtn = items[currentIndex].button;
-        if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
-            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        // Only center the active thumbnail when user navigates (thumb/prev/next/keyboard), not on init
+        if (via) {
+            const activeBtn = items[currentIndex].button;
+            if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
+                activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
         }
     }
 
     items.forEach(item => {
-        item.button.addEventListener('click', () => render(Number(item.button.dataset.index)));
+        item.button.addEventListener('click', () => render(Number(item.button.dataset.index), 'thumb'));
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', () => render(currentIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => render(currentIndex + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => render(currentIndex - 1, 'nav'));
+    if (nextBtn) nextBtn.addEventListener('click', () => render(currentIndex + 1, 'nav'));
+
+    // Scope arrow key navigation to when the gallery viewer is hovered or focused
+    const viewer = document.querySelector('.gallery-viewer');
+    let galleryHotkeys = false;
+    if (viewer) {
+        viewer.addEventListener('mouseenter', () => { galleryHotkeys = true; });
+        viewer.addEventListener('mouseleave', () => { galleryHotkeys = false; });
+        viewer.addEventListener('focusin', () => { galleryHotkeys = true; });
+        viewer.addEventListener('focusout', () => { galleryHotkeys = viewer.contains(document.activeElement); });
+    }
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') render(currentIndex - 1);
-        if (e.key === 'ArrowRight') render(currentIndex + 1);
+        if (!galleryHotkeys) return;
+        if (e.key === 'ArrowLeft') render(currentIndex - 1, 'key');
+        if (e.key === 'ArrowRight') render(currentIndex + 1, 'key');
     });
 
-    render(0);
+    // Initial render without recentering the thumbnails
+    render(0, null);
 });
