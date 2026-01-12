@@ -89,7 +89,7 @@ nav a:first-child i {
     margin-right: 6px;
 }
 
-nav a:hover { background-color: #667eea; }
+nav a:hover { background-color: #008f42; }
 
 .dark-mode-btn {
     background: none;
@@ -106,7 +106,7 @@ nav a:hover { background-color: #667eea; }
     line-height: 1.6;
 }
 
-.dark-mode-btn:hover { background-color: #667eea; }
+.dark-mode-btn:hover { background-color: #008f42; }
 .mode-label { font-size: 0.95em; font-weight: 600; }
 
 
